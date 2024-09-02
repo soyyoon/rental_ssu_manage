@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>전정공 대여소 관리자 버전</title> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_manage.css') }}"> 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>전정공 대여소 관리자 버전</h1> 
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>물품명</th>
+                        <th>잔여 수량</th>
+                        <th>대여 기간</th>
+                        <th>수량 변경</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if items %}
+                        {% for item in items %}
+                            <tr>
+                                <td>{{ item.id }}</td> 
+                                <td>{{ item.name }}</td>
+                                <td class="quantity">{{ item.available_quantity }}</td>
+                                <td>{{ item.due_date if item.due_date else '대여 가능' }}</td>
+
+                                <td>
+                                    <button class="decrease" data-item-id="{{ item.id }}">-</button>
+                                    <button class="increase" data-item-id="{{ item.id }}">+</button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                            <p>No items found.</p>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='manage.js') }}"></script>
+
+</body>
+</html>
