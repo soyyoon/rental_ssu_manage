@@ -32,9 +32,9 @@
                         {% for item in items %}
                             <tr>
                                 <td>{{ item.id }}</td> 
-                                <td>{{ item.name }}</td>
+                                <td>{{ item.item_name }}</td>
                                 <td class="quantity">{{ item.available_quantity }}</td>
-                                <td>{{ item.due_date if item.due_date else '대여 가능' }}</td>
+                                <td>{{ item.due_date if item.return_deadline else '대여 가능' }}</td>
 
                                 <td>
                                     <button class="decrease" data-item-id="{{ item.id }}">-</button>
