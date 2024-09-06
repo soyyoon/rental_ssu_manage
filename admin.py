@@ -30,7 +30,7 @@ admin_app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 def manage():
     try:
         cur = mysql.connection.cursor()
-        cur.execute('SELECT * FROM items')
+        cur.execute('SELECT * FROM rental_items')
         items = cur.fetchall()
         cur.close()
         return render_template('manage.html', items=items) 
@@ -43,7 +43,7 @@ def manage():
 def decrease_quantity(item_id):
     try:
         cur = mysql.connection.cursor()
-        cur.execute('UPDATE items SET available_quantity = available_quantity - 1 WHERE id = %s AND available_quantity > 0', (item_id,))
+        cur.execute('UPDATE rental_items SET available_quantity = available_quantity - 1 WHERE id = %s AND available_quantity > 0', (item_id,))
         mysql.connection.commit()
         cur.close()
         return jsonify({'success': True})
@@ -54,7 +54,7 @@ def decrease_quantity(item_id):
 def increase_quantity(item_id):
     try:
         cur = mysql.connection.cursor()
-        cur.execute('UPDATE items SET available_quantity = available_quantity + 1 WHERE id = %s', (item_id,))
+        cur.execute('UPDATE rental_items SET available_quantity = available_quantity + 1 WHERE id = %s', (item_id,))
         mysql.connection.commit()
         cur.close()
         return jsonify({'success': True})
