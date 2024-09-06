@@ -34,7 +34,7 @@
                                 <td>{{ item.id }}</td> 
                                 <td>{{ item.item_name }}</td>
                                 <td class="quantity">{{ item.available_quantity }}</td>
-                                <td>{{ item.due_date if item.return_deadline else '대여 가능' }}</td>
+                                <td>{{ item.return_deadline if item.return_deadline else '대여 가능' }}</td>
 
                                 <td>
                                     <button class="decrease" data-item-id="{{ item.id }}">-</button>
